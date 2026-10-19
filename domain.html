@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Literature survey, research gap, problem, objectives, methodology and technologies for the four Tour Ceylon research components.">
+<meta name="theme-color" content="#1d4ed8">
+<title>Domain | Tour Ceylon</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"></div>
+<input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open or close the menu">
+<header class="site-header"><div class="bar">
+<a class="brand" href="index.html"><span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#1e40af"/></linearGradient></defs><circle cx="16" cy="16" r="14" fill="none" stroke="url(#lg)" stroke-width="2"/><path d="M16 6l4 10-4 10-4-10z" fill="url(#lg)"/></svg></span><span class="brand-text">Tour Ceylon<small>R26-IT-152</small></span></a>
+<label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+<nav class="main-nav" aria-label="Main navigation">
+<a href="index.html">Home</a>
+<a href="domain.html" class="active" aria-current="page">Domain</a>
+<a href="milestones.html">Milestones</a>
+<a href="documents.html">Documents</a>
+<a href="presentations.html">Presentations</a>
+<a href="about.html">About Us</a>
+<a href="contact.html">Contact Us</a>
+</nav>
+</div></header>
+<main id="main">
+<section class="page-hero page-hero-photo"><div class="page-hero-overlay"></div>
+<div class="wrap"><p class="kicker rise">Domain</p><h1 class="rise rise-d1">Research <span class="grad-text">background</span></h1>
+<p class="lead rise rise-d2">Literature survey, research gap, problem, objectives, methodology and technologies for each of the four components. Choose a component below.</p></div></section>
+
+<section class="block block-tight"><div class="wrap tabs">
+<input type="radio" name="tab" id="t1" checked><input type="radio" name="tab" id="t2"><input type="radio" name="tab" id="t3"><input type="radio" name="tab" id="t4">
+<div class="tab-list" role="tablist">
+<label for="t1">SOS Emergency</label><label for="t2">Itinerary</label><label for="t3">Wellness</label><label for="t4">Risk &amp; Context</label>
+</div>
+<div class="panels">
+<section class="panel" id="p1">
+<div class="panel-head"><span class="tag">De Silva D.S.K &middot; R26-IT-152</span><h2>SOS Emergency System</h2></div>
+<details class="dd" open><summary>Literature survey</summary><div class="inner"><ol>
+<li>Mobile safety and emergency-response apps for travellers commonly combine GPS location, one-tap alerts and routing to local responders. Tourism safety research highlights that generic panic buttons without structured incident types and agency routing can delay dispatch or misdirect medical and police resources, particularly when a tourist cannot explain the situation under stress.</li>
+<li><strong>Breiman (2001)</strong> and subsequent NLP work establish Random Forest with sparse text features such as TF-IDF n-grams as a strong baseline for short-text classification with moderate labelled datasets. This supports using Random Forest as an explainable approach to labelling short tourist incident statements in a production SOS flow.</li>
+<li>Multilingual and voice-driven emergency reporting research emphasises that tourists may speak Sinhala, Tamil or English. Combining speech-to-text, language detection and translation before classification can reduce friction compared with English-only forms, while keyword-only rules can fail on paraphrases and mixed-language input.</li>
+<li>Tourism safety literature and SLTDA statistics describe growing international arrivals and safety incidents at popular sites. However, trip-planning platforms and live SOS workflows are rarely integrated to provide profile context, live GPS, urgency tiers and responder dashboards in one tourism ecosystem.</li>
+</ol></div></details>
+<details class="dd"><summary>Research gap</summary><div class="inner"><ul>
+<li>Tourist SOS tools often lack machine-learned incident classification trained on domain-specific statements mapped to operational types such as medical emergencies, theft, harassment and fire.</li>
+<li>Fixed keyword lists can fail on informal or non-English phrasing, and systems often do not compare Random Forest, Logistic Regression and rule-based baselines on held-out tourist text.</li>
+<li>Emergency apps frequently operate separately from the main tourism portal, without JWT handoff, shared PostgreSQL identity or trip and itinerary context from related modules.</li>
+<li>Real-time coordination features, including SocketIO alerts, police and immigration dashboards, and an offline queue for connectivity loss, are underrepresented in tourism IT prototypes.</li>
+</ul></div></details>
+<details class="dd"><summary>Research problem</summary><div class="inner"><p>Tourists in Sri Lanka need to report emergencies quickly with an accurate location and situation type so the appropriate responder, such as police, a hospital or fire services, can act. Manual calls under stress, language barriers and unstructured chat messages can cause misclassification, delayed dispatch and missing GPS or profile context. This research addresses how to build an integrated SOS Emergency System within Tour Ceylon that classifies incident intent from text or voice-derived text, assigns urgency and responder routes, streams live location and optional journey trails, and notifies authorities in near real time while remaining usable offline when networks fail.</p></div></details>
+<details class="dd"><summary>Research objectives</summary><div class="inner">
+<p><strong>Main objective:</strong> To design, implement and evaluate an SOS Emergency Detection System that uses supervised machine learning and geolocation services to classify tourist emergency statements, route incidents to appropriate responders and deliver real-time alerts through web dashboards integrated with the group tourism platform.</p>
+<p><strong>Novelty:</strong> An integrated, multilingual-aware tourist SOS workflow combining incident classification, urgency and responder routing, live location, offline delivery and authority dashboards with shared Tour Ceylon identity and trip context.</p>
+<p><strong>Specific objectives:</strong></p><ul>
+<li>Curate a labelled corpus of tourist SOS statements mapped to valid incident types and responder channels: police, medical and fire.</li>
+<li>Train and persist <em>sos_models.joblib</em> with Random Forest incident-type and responder-routing models using TF-IDF features; report accuracy and macro-F1 against keyword and dummy baselines.</li>
+<li>Implement text preprocessing and multilingual support, including normalisation, Sinhala/Tamil-safe tokenisation, and speech-to-text and translation before classification where voice is used.</li>
+<li>Provide a tourist interface with one-tap SOS, live GPS, Safe Journey route logging, nearby services and an offline SOS queue that synchronises when connectivity returns.</li>
+<li>Provide authority dashboards with SocketIO incident updates, chat and voice threads, and urgency derived from incident type.</li>
+<li>Integrate with Tour Ceylon login through JWT handoff, store incidents in PostgreSQL and optionally include trip context from the AI Itinerary Generator.</li>
+<li>Evaluate with held-out machine-learning metrics, functional API tests and scenario walkthroughs covering denied GPS, offline sending and voice statements.</li>
+</ul></div></details>
+<details class="dd"><summary>Methodology</summary><div class="inner">
+<p><strong>Design Science Research:</strong> Identify the tourist safety communication problem, design the ML-backed SOS module and multi-role web clients, then demonstrate and evaluate the artefact using machine-learning metrics, integration tests and stakeholder scenarios.</p>
+<p><strong>ML methodology:</strong> Use a stratified 80/20 hold-out split on labelled statements and TF-IDF unigrams and bigrams with English stop words. Train Random Forest models for incident type and responder routing, and compare them with Logistic Regression, <em>TYPE_KEYWORDS</em> rules and <em>DummyClassifier</em>. Refit the selected model on the full corpus for serving and store evaluation results in <em>metrics.json</em>.</p>
+<p><strong>System methodology:</strong> Serve Flask REST APIs and realtime events through Flask-SocketIO; obtain coordinates with the browser Geolocation API; use Web Speech or a backend voice pipeline for optional speech-to-text; and persist and retry SOS events offline when the connection returns. Tourist, police and immigration clients share the unified backend on port 5002.</p>
+</div></details>
+<details class="dd"><summary>Technologies used</summary><div class="inner">
+<p><strong>Machine learning and data:</strong></p><div class="chips"><span class="chip">Python 3</span><span class="chip">scikit-learn</span><span class="chip">RandomForestClassifier</span><span class="chip">TfidfVectorizer</span><span class="chip">train/test split</span><span class="chip">joblib</span><span class="chip">sos_models.joblib</span><span class="chip">sos_ml_corpus.py</span><span class="chip">train_sos_ml.py</span><span class="chip">RETRAIN_SOS_ML.bat</span></div>
+<p><strong>Backend and realtime:</strong></p><div class="chips"><span class="chip">Flask</span><span class="chip">Flask-SocketIO</span><span class="chip">SQLAlchemy</span><span class="chip">PostgreSQL</span><span class="chip">REST JSON APIs</span><span class="chip">SocketIO events</span><span class="chip">Chat and voice</span><span class="chip">Speech-to-text</span><span class="chip">Translation</span></div>
+<p><strong>Frontend, security and integration:</strong></p><div class="chips"><span class="chip">React</span><span class="chip">Vite</span><span class="chip">Tourist SOS app</span><span class="chip">Police dashboard</span><span class="chip">Immigration portal</span><span class="chip">Geolocation API</span><span class="chip">Offline SOS queue</span><span class="chip">JWT sessions</span><span class="chip">Tour Ceylon login handoff</span><span class="chip">sosClient.js</span><span class="chip">AI Itinerary integration</span></div>
+<p><strong>Data and ethics:</strong> Seed scripts provide station and responder data. The ML corpus minimises personal information; live GPS and profile details are used for emergency dispatch only with user consent.</p>
+</div></details>
+</section>
+<section class="panel" id="p2">
+<div class="panel-head"><span class="tag">Wanniarachchi P.M.R &middot; IT22225092 &middot; R26-IT-152</span><h2>AI Itinerary Generator</h2></div>
+<details class="dd" open><summary>Literature survey</summary><div class="inner">
+<ol>
+<li><strong>Vansteenwegen et al.</strong> developed the City Trip Planner, which collects interest ratings for predefined points-of-interest categories and builds personalised city routes. Their work shows that structured preferences improve visit sequencing, but relies on fixed category scores rather than free-text goals mapped to a national attraction register with moods, activities and visit-time windows.</li>
+<li><strong>Bravo et al. (2023)</strong> applied Linear Regression, KNN, Decision Trees and Random Forest to predict visitors to heritage sites on Peru's Moche Route using public tabular data. The models show the viability of machine learning on moderate tourism datasets, but the work predicts aggregate visitor counts rather than multi-day itineraries, hotel rankings or non-overlapping visit slots linked to meal-plan price bands.</li>
+<li><strong>Breiman (2001)</strong> formalised Random Forest as an ensemble method that handles nonlinear relationships and high-dimensional mixed features through bagging. This foundation supports applying Random Forest to combined TF-IDF text similarity and structured trip context such as budget, comfort, meal plan and dates.</li>
+<li><strong>Atrio Lema et al. (2025)</strong> modelled sustainable pilgrim flow at Camino de Santiago route hotspots. Their work demonstrates how machine learning can inform movement along tourist corridors, but does not integrate natural-language trip intent, accommodation registries or calendar rules for inbound leisure tours.</li>
+</ol></div></details>
+<details class="dd"><summary>Research gap</summary><div class="inner"><ul>
+<li>There is no integrated tool mapping free-text experience descriptions to local catalogue records by attraction name, category, mood, activities and details while respecting official visit windows.</li>
+<li>Attraction ranking, destination-night allocation, visit-slot selection and hotel choice are generally handled separately; a unified, reproducible Random Forest pipeline for Sri Lankan Excel catalogues is missing.</li>
+<li>Commercial planners and generic AI tools rarely enforce non-overlapping schedules, arrival and departure day rules, or BB/HB/FB LKR price bands across the hotel registry.</li>
+<li>Many prototypes lack examiner-verifiable artefacts, including training data, scripts and metrics, needed for IT4010-level replication.</li>
+</ul></div></details>
+<details class="dd"><summary>Research problem</summary><div class="inner"><p>Independent tourists planning trips in Sri Lanka must jointly choose attractions that match their interests, allocate nights across regions, select non-overlapping visit times and find registered hotels that fit their budget, comfort tier and board type. Manual planning and generic AI suggestions are slow, error-prone and often disconnected from curated national inventory. The research problem is the absence of a reproducible, machine-learning-driven itinerary engine within the Tour Ceylon platform that converts natural-language goals and structured trip inputs into calendar-valid, timed, multi-day plans grounded in <em>attractions.xlsx</em> and <em>accomadation.xlsx</em>.</p></div></details>
+<details class="dd"><summary>Research objectives</summary><div class="inner">
+<p><strong>Main objective:</strong> To design, implement and evaluate a web-based AI Itinerary Generator that uses Random Forest models and TF-IDF features on curated Sri Lankan catalogues to produce calendar-valid, timed, multi-day itineraries with meal-aware hotel economics, exposed through REST APIs and a React trip wizard.</p>
+<p><strong>Novelty:</strong> A reproducible, catalogue-grounded pipeline that coordinates attraction relevance, destination allocation, visit-slot selection and hotel ranking, while enforcing inbound calendar rules and meal-plan price bands.</p>
+<p><strong>Specific objectives:</strong></p>
+<ul>
+<li>Maintain <em>attractions.xlsx</em> and <em>accomadation.xlsx</em> as sources of truth, sync them to the Random Forest package and seed PostgreSQL, including BB/HB/FB price columns.</li>
+<li>Build <em>RF_training_data.xlsx</em> with labelled trips, attractions, hotels, visit times, places per day, destinations and sample itineraries using <em>build_training_data.py</em>.</li>
+<li>Train need, attraction, destination, slot, hotel and places-per-day models; persist the models and timing parameters in <em>rf_bundle.joblib</em> using <em>train_models.py</em>.</li>
+<li>Implement runtime generation and Flask integration through <em>generate_itinerary.py</em> and <em>rf_itinerary_service.py</em> for suggestions, hotel ranking and full itinerary JSON/PDF output.</li>
+<li>Enforce inbound calendar rules: arrival day is for transfer and hotel check-in only, and departure day has no new sightseeing.</li>
+<li>Evaluate hold-out AUC/F1 metrics and functional API tests, and compare performance with keyword and rule-only baselines.</li>
+<li>Integrate with the platform by sharing trip context with SOS and driver-matcher modules, with risk intelligence available for optional replanning.</li>
+</ul></div></details>
+<details class="dd"><summary>Methodology</summary><div class="inner">
+<p>The study follows Design Science Research: identify the planning problem, define objectives, build the Random Forest itinerary module and web interface, then evaluate the artefact using machine-learning metrics and functional acceptance tests.</p>
+<p><strong>Technical flow:</strong> Curate and seed the catalogues; synthesise and label training rows in <em>RF_training_data.xlsx</em>; train multiple Random Forest classifiers and regressors with TF-IDF vectorisers, validating by trip with GroupKFold or KFold; freeze the models in <em>rf_bundle.joblib</em> for offline training; then run coordinated inference at generation time alongside deterministic overlap-aware scheduling and calendar rules. Evaluation covers micro-F1 for need labels, AUC for attraction and hotel ranking, and end-to-end itinerary quality.</p>
+</div></details>
+<details class="dd"><summary>Technologies used</summary><div class="inner">
+<p><strong>Machine learning and data:</strong></p><div class="chips"><span class="chip">Python 3</span><span class="chip">scikit-learn</span><span class="chip">Random Forest</span><span class="chip">TF-IDF</span><span class="chip">pandas</span><span class="chip">NumPy</span><span class="chip">joblib</span><span class="chip">Excel catalogues</span><span class="chip">PostgreSQL</span></div>
+<p><strong>Backend and integration:</strong></p><div class="chips"><span class="chip">Flask REST API</span><span class="chip">rf_itinerary_service.py</span><span class="chip">places_rfc_service.py</span><span class="chip">accommodation_rfc_service.py</span><span class="chip">JSON/PDF output</span><span class="chip">SOS integration</span><span class="chip">Driver matcher</span><span class="chip">Tourism risk intelligence</span></div>
+<p><strong>Frontend and operations:</strong></p><div class="chips"><span class="chip">React</span><span class="chip">Attractions, Accommodation and Itinerary pages</span><span class="chip">build_training_data.py</span><span class="chip">train_models.py</span><span class="chip">RETRAIN_ALL_RF.bat</span></div>
+</div></details>
+</section>
+<section class="panel" id="p3">
+<div class="panel-head"><span class="tag">De Silva D.C.M</span><h2>Wellness &amp; Ayurveda Recommender</h2></div>
+<details class="dd" open><summary>Literature survey</summary><div class="inner"><p>• Fonseka and Pavithra (2021): Surveyed 50 wellness tourists; 34% visited Sri Lanka specifically for Ayurveda. Ayurveda was a major destination capability, but the sector lacked standardisation and certification.</p>
+<p>• Bidve, Mishra and Annapurna (2023): Predicted Prakriti/Dosha types using Multinomial Naive Bayes with 0.90 accuracy from a 147-feature questionnaire, but did not link the prediction to healthcare providers.</p>
+<p>• Panteli et al. (2021): Developed a health-tourism recommender that ranks providers against an ideal profile, without considering the traveller's Ayurvedic constitution, review text or safety signals.</p>
+<p>• Hu, Pavlou and Zhang (2006): Showed that average star ratings can misrepresent true quality and that review content provides additional information.</p></div></details>
+<details class="dd"><summary>Research gap</summary><div class="inner"><p>• Existing tourism and health-tourism recommendation systems do not jointly consider a traveller's health condition and Ayurvedic constitution.</p>
+<p>• Dosha classification research focuses on predicting constitution types without connecting predictions to verified Ayurveda centres and meditation retreats in Sri Lanka.</p>
+<p>• There is a lack of integrated systems that analyse guest reviews for quality and safety, explain recommendation scores, and support international tourists in their preferred languages.</p></div></details>
+<details class="dd"><summary>Research problem</summary><div class="inner"><p>International visitors seeking Ayurvedic treatments or meditation retreats in Sri Lanka lack a reliable way to identify centres that match their health conditions, Ayurvedic constitution, budget and language preferences. They also lack a structured, review-based approach to evaluating provider quality and safety before travelling.</p></div></details>
+<details class="dd"><summary>Research objectives</summary><div class="inner"><p><strong>Main objective:</strong> To design, implement and evaluate an explainable, multilingual AI system that matches wellness tourists with suitable Ayurveda treatment centres and spiritual retreats in Sri Lanka.</p><p><strong>Novelty:</strong> A constitution-aware recommendation model combining machine-learning-based Dosha prediction from a short six-question profile with health-condition matching, review-derived quality and budget compatibility across 83 real Sri Lankan centres. It explains recommendation scores, screens reviews for potential safety concerns and supports English, German, Russian, Chinese and Japanese.</p><p><strong>Sub-objectives:</strong></p><p>• Build a curated dataset containing 83 real Ayurveda and meditation centres, verification notes and 256 guest reviews.</p><p>• Train and evaluate Dosha classification models and select Random Forest from six candidate algorithms.</p><p>• Develop a transparent weighted recommendation model using health condition (35%), quality (25%), Dosha compatibility (20%) and budget (20%), and evaluate each factor through an ablation study.</p><p>• Implement multilingual free-text symptom entry and a hybrid keyword-based and machine-learning-based review safety screening system.</p><p>• Develop a secure, tested web application integrated with the Tour Ceylon platform.</p></div></details>
+<details class="dd"><summary>Methodology</summary><div class="inner"><p>A Design Science Research approach was adopted to develop and evaluate the proposed wellness recommendation system. Data on Ayurveda treatment centres and meditation retreats was collected from Google Places listings and guest reviews, followed by manual verification. A Random Forest classifier was selected after comparing six algorithms using 102 tourist profiles, comprising six real expert cases and expert-rule variations. The selected classifier achieved 0.810 test accuracy and 84.3% five-fold cross-validated accuracy. A transparent weighted recommendation model ranks centres according to health-condition compatibility (35%), review-based quality (25%), Dosha compatibility (20%) and budget compatibility (20%). An ablation study involving 60 queries showed that the complete model increased the top-ranked match's average quality score from 3.41 to 4.61 out of 5 and budget alignment from 50% to 90% compared with condition-only matching. Ten TF-IDF and SVM classifiers support free-text symptom processing in five languages, while a hybrid keyword and SVM-based layer flags potentially unsafe guest reviews. Models are retrained and evaluated through a reproducible notebook. The application was tested using 48 automated test cases, with 75 out of 75 reported test checks passing. User acceptance testing with tourists remains pending.</p></div></details>
+<details class="dd"><summary>Technologies used</summary><div class="inner"><p>Python, Flask, scikit-learn (Random Forest, SVM, TF-IDF), pandas, PostgreSQL (with JSON fallback), HTML/CSS/JavaScript, Leaflet + OpenStreetMap, Web Speech API, Google Colab / Jupyter, pytest, Git/GitHub.</p></div></details>
+</section>
+<section class="panel" id="p4">
+<div class="panel-head"><span class="tag">Abinaya R &middot; IT22090058</span><h2>Tourism Risk &amp; Context Intelligence System</h2></div>
+<details class="dd" open><summary>Literature survey</summary><div class="inner">
+<p>This component draws on ten sources, including:</p>
+<ul>
+<li><strong>Bravo et al. (2023)</strong> compared four regression models for visitor prediction at heritage attractions in Peru and showed that public data can support a workable model.</li>
+<li><strong>Kim et al. (2025)</strong> showed that tree-based models, including Random Forest, predict daily visitors on a forest trail, with traffic volume and weekday effects among the strongest predictors.</li>
+<li><strong>Mihali&#269; (2020)</strong> argued that overtourism needs real-time, demand-side management and not supply-side policy alone.</li>
+<li><strong>Santos-Rojo et al. (2023)</strong> found that applied technical systems for overtourism remain rare, with research concentrated in European cities.</li>
+<li><strong>Atrio Lema et al. (2025)</strong> and <strong>Nurhasanah et al. (2022)</strong> used seasonal time-series models for pilgrim flows and national arrivals, without site-level context or risk output.</li>
+<li><strong>He et al. (2022)</strong> showed that deep networks can excel at crowd prediction but need large, fine-grained datasets that Sri Lankan sites do not have.</li>
+<li><strong>SLTDA (2024)</strong> publishes visitor statistics as annual totals, with no daily site-level breakdown.</li>
+</ul></div></details>
+<details class="dd"><summary>Research gap</summary><div class="inner"><ul>
+<li>Among the sources reviewed, no context-aware crowd and risk prediction system for Sri Lankan tourist sites was found.</li>
+<li>International flight arrivals are not used as a site-level demand signal in the studies reviewed.</li>
+<li>Redirecting visitors to lower-pressure, eco-friendly sites is proposed in the literature but not built into a working prediction pipeline.</li>
+<li>Crowd predictions are rarely linked to a traveller's itinerary.</li>
+<li>Reported accuracy usually comes from random train/test splits, which say little about performance at a site the model has never seen.</li>
+</ul></div></details>
+<details class="dd"><summary>Research problem</summary><div class="inner"><p>How can crowd pressure at individual Sri Lankan tourist sites be predicted in advance from available context data, and how accurately can this be demonstrated for sites the model has not seen?</p></div></details>
+<details class="dd"><summary>Research objectives</summary><div class="inner">
+<p><strong>Main objective:</strong> to design, build and honestly evaluate a context-aware crowd and risk prediction component for Sri Lankan tourist sites.</p>
+<p><strong>Novelty:</strong> evaluating on entirely unseen sites as the primary measure, quantifying how much a random split overstates accuracy, and documenting the data defects found along the way.</p>
+<p><strong>Sub-objectives:</strong></p>
+<ul>
+<li>Assemble and clean a multi-source, site-level dataset covering 197 sites.</li>
+<li>Train and tune a Random Forest to predict a crowd score and a Low, Medium or High risk level.</li>
+<li>Evaluate with site-holdout, random-split and cross-validation schemes against baselines.</li>
+<li>Serve predictions through a REST API and web interface connected to the platform.</li>
+<li>Collect post-visit visitor feedback (observed crowd level, accuracy rating and comments) through the web interface; using this feedback to retrain the model is planned as future work.<!-- NOTE: confirm wording against the thesis. Add the word anonymous only if feedback really is anonymous. --></li>
+</ul></div></details>
+<details class="dd"><summary>Methodology</summary><div class="inner">
+<p>The study follows Design Science Research. Data from two site sources were merged, cleaned and corrected, then used to train a Random Forest that predicts a normalised crowd score, which is converted to a risk level. The strictest test holds out 10 entire sites. A random split and cross-validation are reported as secondary measures. Five-fold cross-validation (R&sup2; 0.8194 &plusmn; 0.0218) and a mean-predictor baseline (MAE 0.1967) are also reported. Temporal testing, site-grouped cross-validation and stronger baselines are identified as further validation work.<!-- NOTE: if temporal testing, site-grouped CV or stronger baselines were actually run, add them above. -->
+<p><strong>Key result:</strong> on unseen sites the model reaches MAE 0.1232 and R&sup2; 0.3331. Under a random split R&sup2; is 0.8492. The crowd score is a constructed index, because official visitor data are annual only.</p>
+</div></details>
+<details class="dd"><summary>Technologies used</summary><div class="inner"><div class="chips"><span class="chip">Python</span><span class="chip">scikit-learn</span><span class="chip">pandas</span><span class="chip">NumPy</span><span class="chip">Flask</span><span class="chip">React</span><span class="chip">Vite</span><span class="chip">REST API</span></div></div></details>
+</section>
+</div>
+</div></section>
+
+<section class="block block-flush"><div class="wrap">
+<p class="kicker">Shared stack</p><h2>Technologies used across the platform</h2>
+<div class="chips chips-spaced"><span class="chip">Python</span><span class="chip">Flask</span><span class="chip">scikit-learn</span><span class="chip">React</span><span class="chip">Vite</span><span class="chip">PostgreSQL</span><span class="chip">REST APIs</span><span class="chip">Git and GitHub</span><span class="chip">Microsoft Planner and Teams</span></div>
+<p class="kicker" style="margin-top:22px">Component-specific</p><div class="chips chips-spaced"><span class="chip">Haversine nearest-neighbour routing (SOS)</span><span class="chip">Fernet encryption (SOS)</span><span class="chip">Progressive web app (SOS)</span><span class="chip">Heuristic itinerary planner</span><span class="chip">PDF export (Itinerary)</span><span class="chip">Random Forest dosha classifier (Wellness)</span><span class="chip">SHAP explainability (Risk)</span></div><!-- NOTE: teammates to confirm their component technologies. -->
+</div></section>
+</main>
+<a class="to-top" href="#top" aria-label="Back to top">&uarr;</a>
+<footer class="site-footer"><div class="foot">
+<div class="foot-col"><strong>Tour Ceylon</strong><span>AI-based tourism safety and itinerary platform for Sri Lanka. IT4010 Research Project, Department of Information Technology, SLIIT.</span></div>
+<div class="foot-col"><strong>Explore</strong><a href="index.html">Home</a>
+<a href="domain.html">Domain</a>
+<a href="milestones.html">Milestones</a>
+<a href="documents.html">Documents</a>
+<a href="presentations.html">Presentations</a>
+<a href="about.html">About Us</a>
+<a href="contact.html">Contact Us</a></div>
+<div class="foot-col"><strong>Contact</strong><a href="mailto:it22108654@my.sliit.lk">it22108654@my.sliit.lk</a><span>New Kandy Road, Malabe, Sri Lanka</span></div>
+</div><div class="copy">&copy; 2026 Tour Ceylon (R26-IT-152)</div></footer>
+</body>
+</html>
